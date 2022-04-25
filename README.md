@@ -1,3 +1,4 @@
+<img src="https://gitee.com/jumphone/public/raw/master/fitdevo_logo.png" width="250">
 
 FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight
 
