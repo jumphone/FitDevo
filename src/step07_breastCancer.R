@@ -666,9 +666,9 @@ OUT3=readRDS(file='deseq2_ssgw_agg132.rds')
 ###################################
 
 
-FCUT=log(2,2)
-PCUT=0.05
-MCUT=0.5
+FCUT=log(2,2) # log2fold
+PCUT=0.05 # Adjusted Pvalue
+MCUT=0.5 # BaseMean
 
 SIG_LIST=list()
 N1=c()
