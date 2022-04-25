@@ -26,7 +26,7 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
     
 # Usage:
 
-## fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
+    fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
 
 ## Input:
 
