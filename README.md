@@ -1,18 +1,10 @@
 
-FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight
+# FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight
 
 FitDevo is designed for inferring developmental potential (DP) using scRNA-seq data
 
 
-
-
-
-
-
-
-
-
-# Datasets
+# Training & Testing Datasets:
 
 Training dataset (n=17):
 
@@ -30,6 +22,18 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
     # data1$mat is the expression matrix
     # data1$tag is the differentiation label. Higher value indicates higher developmental potential.
     
+
+# Requirements:
+
+    R: 4.0.0+
+    Seurat: 4.0+
+    
+    
+# Installation:
+    
+    # Directly load the code in R
+    source('https://raw.githubusercontent.com/jumphone/fitdevo/main/fitdevo.R') # or source('')
     
     
     
+
