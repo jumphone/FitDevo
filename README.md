@@ -32,26 +32,21 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
 # Usage:
 
     # R 4.0.3 
-    # Step 1. Load FitDevo
     
+    # Step 1. Load FitDevo 
     source('https://gitee.com/jumphone/public/raw/master/fitdevo.R')
     
     # Step 2. Load data (the first sample in testing dataset)
-    
     data1 = readRDS('1.rds')
     MAT=data1$mat
     CorrectDP=data1$tag
     
     # Step 3. Load BGW
-    
     BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds'))
     
     # Step 4. Run FitDevo
-    
     DP=fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
     
     # Step 5. Evaluate the performance of FitDevo
-    
-    cor(DP,CorrectDP, method='spearman')
-    # 0.7980606
+    cor(DP,CorrectDP, method='spearman')  # 0.7980606
 
