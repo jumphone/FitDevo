@@ -48,5 +48,5 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
     DP=fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
     
     # Step 5. Evaluate the performance of FitDevo
-    cor(DP,CorrectDP, method='spearman')  # 0.7980606
+    cor(DP, CorrectDP, method='spearman')  # 0.7980606
 
