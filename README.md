@@ -15,3 +15,12 @@ Testing dataset (n=28):
 https://sourceforge.net/projects/fitdevo/files/testing/
 
 
+Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
+
+    data1 = readRDS('1.rds')
+    # data1$mat is the expression matrix
+    # data1$tag is the differentiation label. Higher value indicates higher developmental potential.
+    
+    
+    
+    
