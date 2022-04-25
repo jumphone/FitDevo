@@ -26,20 +26,20 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
     
 # Usage:
 
-fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
+## fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
 
-Input:
+## Input:
 
     MAT: expression matrix
     BGW: binarized gene weight (BGW) ('https://gitee.com/jumphone/public/raw/master/BGW.rds')
     NORM: whether to run "LogNormalize" in Seurat
     PCNUM: number of PCs used to calculate sample-specific gene weight (SSGW)
 
-Output:
+## Output:
 
     A column vector of inferred DP
 
-Demo Code:
+## Demo Code:
 
     # R 4.0.3 
     
