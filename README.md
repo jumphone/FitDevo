@@ -29,14 +29,9 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
     Seurat: 4.0+
     
     
-# Installation:
-    
-    # Directly load the code in R
-    source('https://raw.githubusercontent.com/jumphone/fitdevo/main/fitdevo.R') # or source('')
-    
 # Usage:
 
-    #/home/toolkit/tools/R4.0.3/bin/R
+    # Load the code of FitDevo
     source('https://gitee.com/jumphone/public/raw/master/fitdevo.R')
     
     # Load the first sample in testing dataset
