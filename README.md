@@ -46,7 +46,7 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
     # Step 1. Load FitDevo 
     source('https://gitee.com/jumphone/public/raw/master/fitdevo.R')
     
-    # Step 2. Load data (the first sample in testing dataset)
+    # Step 2. Load data (the 1st sample in testing dataset)
     data1 = readRDS('1.rds')
     MAT=data1$mat
     CorrectDP=data1$tag
