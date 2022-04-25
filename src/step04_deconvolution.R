@@ -125,6 +125,7 @@ BIN_ID_S3[order(US3)]=BIN_ID
 
 USED=which(pbmc.withoutNA$type != 'MEL')
 set.seed(123)
+# Down sample to improve the speed of CIBERSORTx
 USED=sample(USED,1000)
 
 UDATA=pbmc.withoutNA@assays$RNA@data[,USED]
