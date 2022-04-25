@@ -2,6 +2,63 @@
 
 # /home/toolkit/tools/R4.0.3/bin/R
 
+library(Seurat)
+.normData<-function(mat){
+    mat=mat
+    mat=mat[which(rownames(mat)!=''),]
+    pbmc=CreateSeuratObject(counts = mat, min.cells = 0, min.features = 0, project = "ALL")
+    pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+    this_out=as.matrix(pbmc@assays$RNA@data)
+    return(this_out)
+    }
+
+
+.simple_combine_NA <- function(exp_sc_mat1, exp_sc_mat2, FILL=FALSE){
+    FILL=FILL
+    exp_sc_mat=exp_sc_mat1
+    exp_ref_mat=exp_sc_mat2
+    ##############################################
+    if(FILL==TRUE){
+        gene1=rownames(exp_sc_mat)
+        gene2=rownames(exp_ref_mat)
+        gene12=gene2[which(!gene2 %in% gene1)]
+        gene21=gene1[which(!gene1 %in% gene2)]
+        exp_sc_mat_add=matrix(NA,ncol=ncol(exp_sc_mat),nrow=length(gene12))
+        rownames(exp_sc_mat_add)=gene12
+        colnames(exp_sc_mat_add)=colnames(exp_sc_mat)
+        exp_ref_mat_add=matrix(NA,ncol=ncol(exp_ref_mat),nrow=length(gene21))
+        rownames(exp_ref_mat_add)=gene21
+        colnames(exp_ref_mat_add)=colnames(exp_ref_mat)
+        exp_sc_mat=rbind(exp_sc_mat, exp_sc_mat_add)
+        exp_ref_mat=rbind(exp_ref_mat, exp_ref_mat_add)
+    }
+    ############################################
+    exp_sc_mat=exp_sc_mat[order(rownames(exp_sc_mat)),]
+    exp_ref_mat=exp_ref_mat[order(rownames(exp_ref_mat)),]
+    gene_sc=rownames(exp_sc_mat)
+    gene_ref=rownames(exp_ref_mat)
+    gene_over= gene_sc[which(gene_sc %in% gene_ref)]
+    exp_sc_mat=exp_sc_mat[which(gene_sc %in% gene_over),]
+    exp_ref_mat=exp_ref_mat[which(gene_ref %in% gene_over),]
+    colname_sc=colnames(exp_sc_mat)
+    colname_ref=colnames(exp_ref_mat)
+    OUT=list()
+    OUT$exp_sc_mat1=exp_sc_mat
+    OUT$exp_sc_mat2=exp_ref_mat
+    OUT$combine=cbind(exp_sc_mat,exp_ref_mat)
+    return(OUT)
+    }
+
+.toUpper <- function(DATA){
+    DATA=DATA
+    UPGENE=toupper(rownames(DATA))
+    USED_INDEX=which(UPGENE %in% names(which(table(UPGENE)==1)) )
+    DATA=DATA[USED_INDEX,]
+    rownames(DATA)=UPGENE[USED_INDEX]
+    return(DATA)
+    }
+
+
 
 ##########################################################################################
 # Get Protein Coding Genes
