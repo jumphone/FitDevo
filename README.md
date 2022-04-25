@@ -6,11 +6,11 @@ FitDevo is designed for inferring developmental potential (DP) using scRNA-seq d
 
 # Datasets
 
-Training dataset:
+Training dataset (n=17):
 
 https://sourceforge.net/projects/fitdevo/files/training/
 
-Testing dataset:
+Testing dataset (n=28):
 
 https://sourceforge.net/projects/fitdevo/files/testing/
 
