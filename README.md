@@ -39,7 +39,7 @@ Each sample is saved in a "RDS" file. Users can use R to load the "RDS" file.
 
     A column vector of inferred DP
 
-## Demo Code:
+## Demo:
 
     # R 4.0.3 
     
