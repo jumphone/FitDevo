@@ -2,7 +2,7 @@
 
 FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight
 
-This tool is designed for inferring developmental potential (DP) using scRNA-seq data
+This tool is designed for inferring the developmental potential (DP) of cells in scRNA-seq data
 
 
 # Training & Testing Datasets:
