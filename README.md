@@ -34,7 +34,7 @@ Users can use R to load the "RDS" file.
 ## Input:
 
     MAT: expression matrix
-    BGW: binarized gene weight (BGW) ('https://gitee.com/jumphone/public/raw/master/BGW.rds')
+    BGW: binarized gene weight (BGW) ('https://gitee.com/jumphone/public/raw/master/BGW.rds' or 'https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true')
     NORM: whether to run "LogNormalize" in Seurat
     PCNUM: number of PCs used to calculate sample-specific gene weight (SSGW)
 
@@ -47,7 +47,7 @@ Users can use R to load the "RDS" file.
     # R 4.0.3 
     
     # Step 1. Load FitDevo 
-    source('https://gitee.com/jumphone/public/raw/master/fitdevo.R')
+    source('https://gitee.com/jumphone/public/raw/master/fitdevo.R') # or source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
     # Step 2. Load data (the 1st sample in testing dataset)
     data1 = readRDS('1.rds')
@@ -55,7 +55,7 @@ Users can use R to load the "RDS" file.
     CorrectDP=data1$tag
     
     # Step 3. Load BGW
-    BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds'))
+    BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds')) # or BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
     
     # Step 4. Run FitDevo
     DP=fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
