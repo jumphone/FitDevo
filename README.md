@@ -47,7 +47,8 @@ Users can use R to load the "RDS" file.
     # R 4.0.3 
     
     # Step 1. Load FitDevo 
-    source('https://gitee.com/jumphone/public/raw/master/fitdevo.R') # or source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
+    source('https://gitee.com/jumphone/public/raw/master/fitdevo.R') 
+    # or source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
     # Step 2. Load data (the 1st sample in testing dataset)
     data1 = readRDS('1.rds')
@@ -55,7 +56,8 @@ Users can use R to load the "RDS" file.
     CorrectDP=data1$tag
     
     # Step 3. Load BGW
-    BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds')) # or BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
+    BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds')) 
+    # or BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
     
     # Step 4. Run FitDevo
     DP=fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
