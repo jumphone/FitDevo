@@ -83,6 +83,7 @@ calScore <- function(MAT, GW){
 
 
 
+
 fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     #################
     library(Seurat)
@@ -189,6 +190,8 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     return(DP)
     }
     }
+
+
 
 
 
