@@ -109,7 +109,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
         SH_MAT=MAT[,shuffle_index]
         ############################
         splitBy= (seq(ncol(SH_MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
-        lst = split(colnames(MAT), splitBy)
+        lst = split(colnames(SH_MAT), splitBy)
         #############################
         result_shuffle = unlist(lapply(lst, function(x){fitdevo(SH_MAT[, x], BGW, NORM, PCNUM)}))
         result=result_shuffle
