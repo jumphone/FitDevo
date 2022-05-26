@@ -114,6 +114,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
         result_shuffle = unlist(lapply(lst, function(x){fitdevo(SH_MAT[, x], BGW, NORM, PCNUM)}))
         result=result_shuffle
         result[shuffle_index]=result_shuffle
+        names(result)=colnames(MAT)
         return(result)    
     }else{
 
