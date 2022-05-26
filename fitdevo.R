@@ -79,11 +79,23 @@ calScore <- function(MAT, GW){
 
 
 
+
+
+
+
 fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     #################
     library(Seurat)
     #################
     
+    #####################################################
+    print('FitDevo starts !')
+    #####################################################
+    print(Sys.time())
+    #####################################################
+    print('Preprocessing ... ')
+    #####################################################
+
     #####################################################
     # Load data
     MAT=MAT
@@ -103,13 +115,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
         lst = split(colnames(MAT), splitBy_shuffle)
         result = unlist(lapply(lst, function(x){fitdevo(MAT[, x], BGW, NORM, PCNUM)}))
     }else{
-    #####################################################
-    print('FitDevo starts !')
-    #####################################################
-    print(Sys.time())
-    #####################################################
-    print('Preprocessing ... ')
-    #####################################################
+    
     # Preprocess
     this_mat=.toUpper(MAT)
     NNN=min(c(PCNUM,ncol(this_mat)-1))
@@ -174,6 +180,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     return(DP)
     }
     }
+
 
 
 
