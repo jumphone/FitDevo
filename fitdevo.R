@@ -111,9 +111,13 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     if(ncol(MAT) > tooLargeLimit){
         set.seed(123)
         splitBy= (seq(ncol(MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
-        splitBy_shuffle=splitBy[shuffle(ncol(MAT))] 
+        shuffle_index=shuffle(ncol(MAT))
+        splitBy_shuffle=splitBy[shuffle_index] 
         lst = split(colnames(MAT), splitBy_shuffle)
-        result = unlist(lapply(lst, function(x){fitdevo(MAT[, x], BGW, NORM, PCNUM)}))
+        result_shuffle = unlist(lapply(lst, function(x){fitdevo(MAT[, x], BGW, NORM, PCNUM)}))
+        result=result_shuffle
+        result[shuffle_index]=result_shuffle
+        return(result)    
     }else{
     
     # Preprocess
