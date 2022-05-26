@@ -79,7 +79,6 @@ calScore <- function(MAT, GW){
 
 
 
-
 fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     #################
     library(Seurat)
@@ -92,6 +91,18 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     NORM=NORM
     PCNUM=PCNUM
 
+    ##########################################################
+    # Solve big matrix
+    tooLargeLimit=50000
+    tooLargeLimitDelta=10000
+    #########################################################
+    if(ncol(MAT) > tooLargeLimit){
+        set.seed(123)
+        splitBy= (seq(ncol(MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
+        splitBy_shuffle=splitBy[shuffle(ncol(MAT))] 
+        lst = split(colnames(MAT), splitBy_shuffle)
+        result = unlist(lapply(lst, function(x){fitdevo(MAT[, x], BGW, NORM, PCNUM)}))
+    }else{
     #####################################################
     print('FitDevo starts !')
     #####################################################
@@ -161,7 +172,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     print(Sys.time())
     #######################################
     return(DP)
-
+    }
     }
 
 
