@@ -88,6 +88,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     library(Seurat)
     #################
     
+
     #####################################################
     # Load data
     MAT=MAT
@@ -101,17 +102,21 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     tooLargeLimitDelta=10000
     #########################################################
     if(ncol(MAT) > tooLargeLimit){
+        ############################
         set.seed(123)
-        splitBy= (seq(ncol(MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
         shuffle_index=shuffle(ncol(MAT))
-        splitBy_shuffle=splitBy[shuffle_index] 
-        lst = split(colnames(MAT), splitBy_shuffle)
-        result_shuffle = unlist(lapply(lst, function(x){fitdevo(MAT[, x], BGW, NORM, PCNUM)}))
+        SH_MAT=MAT[,shuffle_index]
+        ############################
+        splitBy= (seq(ncol(SH_MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
+        lst = split(colnames(MAT), splitBy)
+        #############################
+        result_shuffle = unlist(lapply(lst, function(x){fitdevo(SH_MAT[, x], BGW, NORM, PCNUM)}))
         result=result_shuffle
         result[shuffle_index]=result_shuffle
         return(result)    
     }else{
-    
+
+        
     #####################################################
     print('FitDevo starts !')
     #####################################################
@@ -119,7 +124,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     #####################################################
     print('Preprocessing ... ')
     #####################################################
-        
+    
     # Preprocess
     this_mat=.toUpper(MAT)
     NNN=min(c(PCNUM,ncol(this_mat)-1))
@@ -184,6 +189,13 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     return(DP)
     }
     }
+
+
+
+
+
+
+
 
 
 
