@@ -109,6 +109,7 @@ Vector: https://github.com/jumphone/Vector
 
     
 <img src="https://gitee.com/jumphone/public/raw/master/fitdevo_vector_tra.jpg" width="250">    
+
 <img src="https://gitee.com/jumphone/public/raw/master/fitdevo_type.jpg" width="250">    
     
     
