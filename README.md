@@ -44,7 +44,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
     A column vector of inferred DP
 
-## Demo:
+## Demo: use FitDevo alone:
 
     # R 4.0.3 
     
@@ -67,3 +67,45 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
     # Step 5. Evaluate the performance of FitDevo
     cor(DP, CorrectDP, method='spearman')  # 0.7980606
 
+
+
+
+## Demo: combine FitDevo with trajectory-based method (Vector):
+
+    # R 4.0.3 
+    
+    # Step 1. Load FitDevo 
+    source('https://gitee.com/jumphone/public/raw/master/fitdevo.R') 
+    # or source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
+    
+    # Step 2. Load data
+    seuratData = readRDS('brain.rds')
+    
+    # Step 3. Load BGW
+    BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds')) 
+    # or BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
+    
+    # Step 4. Run FitDevo
+    MAT=seuratData[['RNA']]@counts
+    DP=fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
+    
+    # Step 5. Load Vector
+    source('https://gitee.com/jumphone/Vector/raw/master/Vector.R')
+    # or source('https://raw.githubusercontent.com/jumphone/Vector/master/Vector.R') 
+    
+    # Step 6. Combine FitDevo & Vector
+    VEC = seuratData@reductions$umap@cell.embeddings
+    rownames(VEC) = colnames(seuratData)
+    PCA = seuratData@reductions$pca@cell.embeddings
+    
+    OUT=vector.buildGrid(VEC, N=30,SHOW=FALSE)
+    OUT=vector.buildNet(OUT, CUT=1, SHOW=FALSE)
+    OUT$VALUE=DP
+    OUT=vector.gridValue(OUT,SHOW=FALSE)
+    OUT=vector.autoCenter(OUT,UP=0.9,SHOW=FALSE)
+    OUT=vector.drawArrow(OUT,P=0.9,SHOW=TRUE, COL=OUT$COL, SHOW.SUMMIT=TRUE)
+
+    
+<img src="https://gitee.com/jumphone/public/raw/master/fitdevo_vector_tra.jpg" width="250">    
+    
+    
