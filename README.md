@@ -72,6 +72,8 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 ## Demo 2: combine FitDevo with trajectory-based method (Vector):
 
+Vector: https://github.com/jumphone/Vector
+
     # R 4.0.3 
     
     # Step 1. Load FitDevo 
