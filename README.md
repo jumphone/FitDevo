@@ -1,4 +1,4 @@
-<img src="https://gitee.com/jumphone/public/raw/master/fitdevo_logo.png" width="250">
+<img src="https://raw.githubusercontent.com/jumphone/FitDevo/main/img/fitdevo_logo.png" width="250">
 
 FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight
 
@@ -108,8 +108,8 @@ Vector: https://github.com/jumphone/Vector
     OUT=vector.drawArrow(OUT,P=0.9,SHOW=TRUE, COL=OUT$COL, SHOW.SUMMIT=TRUE)
 
     
-<img src="https://gitee.com/jumphone/public/raw/master/fitdevo_vector_tra.jpg" width="250">    
+<img src="https://github.com/jumphone/FitDevo/raw/main/img/fitdevo_vector_tra.jpg" width="250">    
 
-<img src="https://gitee.com/jumphone/public/raw/master/fitdevo_type.jpg" width="250">    
+<img src="https://github.com/jumphone/FitDevo/raw/main/img/fitdevo_type.jpg" width="250">    
     
     
