@@ -44,7 +44,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
     A column vector of inferred DP
 
-## Demo: use FitDevo alone:
+## Demo 1: use FitDevo alone:
 
     # R 4.0.3 
     
@@ -70,7 +70,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 
 
-## Demo: combine FitDevo with trajectory-based method (Vector):
+## Demo 2: combine FitDevo with trajectory-based method (Vector):
 
     # R 4.0.3 
     
