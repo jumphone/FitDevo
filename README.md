@@ -42,7 +42,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 ## Output:
 
-    A column vector of inferred DP
+    A vector of inferred DP
 
 ## Demo:
 
