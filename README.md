@@ -104,6 +104,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
     cor(DP, CorrectDP, method='spearman')  # 0.7980606
 
 </br>
+</br>
 
 ## Demo 2 - Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
 
@@ -131,7 +132,12 @@ The function named "fitdevo.field" follows the ideas of another tool (VECTOR). I
 
 <img src="https://github.com/jumphone/FitDevo/blob/main/img/f01_demo2_fitdevo.field.png?raw=true" width="300">
 
-    
+</br>
+</br>
+
+
+
+
 </br>
 
 [Click back to the top](#)
