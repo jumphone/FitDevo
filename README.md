@@ -44,15 +44,15 @@ Users can use R to load the "RDS" file.
     # data1$mat is the expression matrix
     # data1$tag is the reverse order of timepoint label (higher value indicates higher developmental potential).
     
-
 </br>
-
 
 # Requirements:
 
     R: 4.0.0+
     Seurat: 4.0+
 
+</br>
+* [Click back to the top](#content)
 </br>
     
 # Usage:
@@ -72,9 +72,10 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
     A vector of inferred DP
     
-
-
 </br>
+* [Click back to the top](#content)
+</br>
+
 
 # Demos:
 
@@ -110,7 +111,6 @@ Users should provide the embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.). Th
 The function named "fitdevo.field" follows the ideas of another tool (VECTOR). If you are using this function in your work, please also cite: Unsupervised Inference of Developmental Directions for Single Cells Using VECTOR, Cell Reports, 2020, https://doi.org/10.1016/j.celrep.2020.108069.
 
 </br>
-</br>
 
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
@@ -130,5 +130,7 @@ The function named "fitdevo.field" follows the ideas of another tool (VECTOR). I
 
 --------------------------------------------------------------------------------------------------------------------
     
-
+</br>
+* [Click back to the top](#content)
+</br>
 
