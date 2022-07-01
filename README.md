@@ -80,6 +80,8 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 # Demos:
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Demo 1 | Infer developmental potential (DP) using expression matrix of scRNA-seq data
 
     # R 4.0.3 
