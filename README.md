@@ -52,9 +52,12 @@ Users can use R to load the "RDS" file.
     Seurat: 4.0+
 
 </br>
-* [Click back to the top](#content)
+
+[Click back to the top](#content)
+
 </br>
-    
+
+
 # Usage:
 
     fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
@@ -73,7 +76,9 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
     A vector of inferred DP
     
 </br>
-* [Click back to the top](#content)
+
+[Click back to the top](#content)
+
 </br>
 
 
@@ -131,6 +136,8 @@ The function named "fitdevo.field" follows the ideas of another tool (VECTOR). I
 --------------------------------------------------------------------------------------------------------------------
     
 </br>
-* [Click back to the top](#content)
+
+[Click back to the top](#content)
+
 </br>
 
