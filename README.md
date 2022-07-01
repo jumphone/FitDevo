@@ -75,12 +75,17 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 --------------------------------------------------------------------------------------------------------------------
 
 ## Demo 2 | Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
-    
+
 Users should provide embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.).
 
 This demo is based on a "seurat.object" with normalized expression matrix and UMAP.
 
 To generate seurat.object, please refer to: https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
+
+The function named "fitdevo.field" follows the ideas of another tool (VECTOR). If you are using this function in your work, please also cite: 
+
+Unsupervised Inference of Developmental Directions for Single Cells Using VECTOR, Cell Reports, 2020,https://doi.org/10.1016/j.celrep.2020.108069
+    
     
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
