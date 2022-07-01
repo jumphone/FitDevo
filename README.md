@@ -17,6 +17,18 @@ This tool is designed for inferring the developmental potential (DP) of cells in
 
 </br>
 
+
+# Content:
+
+* [Training & Testing Datasets](#training--testing-datasets)
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Demos](#demos)
+
+</br>
+
+
+
 # Training & Testing Datasets:
 
 Training dataset (n=17), https://sourceforge.net/projects/fitdevo/files/training/
@@ -40,7 +52,6 @@ Users can use R to load the "RDS" file.
 
     R: 4.0.0+
     Seurat: 4.0+
-    
 
 </br>
     
@@ -61,7 +72,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
     A vector of inferred DP
     
---------------------------------------------------------------------------------------------------------------------
+
 
 </br>
 
@@ -91,6 +102,8 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 --------------------------------------------------------------------------------------------------------------------
 
 ## Demo 2 | Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
+
+Please install "igraph" and "stringr" before using "fitdevo.field"
 
 Users should provide the embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.). This demo is based on a "seurat.object" with a normalized expression matrix and an UMAP. To generate seurat.object, please refer to: https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
 
