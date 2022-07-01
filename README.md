@@ -4,11 +4,18 @@
 
 This tool is designed for inferring the developmental potential (DP) of cells in scRNA-seq data
 
+
+</br>
+
+
 # Updates:
 
 **2022.07.01, v1.1.0 - New features!** Users can use "fitdevo.field" to build developmental potential field (DPF) and draw arrows.
 
 **2022.06.30, v1.0.1 - Paper version.** The details of this version is described in our BIB (2022) paper.
+
+
+</br>
 
 # Training & Testing Datasets:
 
@@ -26,11 +33,16 @@ Users can use R to load the "RDS" file.
     # data1$tag is the reverse order of timepoint label (higher value indicates higher developmental potential).
     
 
+</br>
+
+
 # Requirements:
 
     R: 4.0.0+
     Seurat: 4.0+
     
+
+</br>
     
 # Usage:
 
@@ -51,9 +63,9 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
     
 --------------------------------------------------------------------------------------------------------------------
 
-# Demos:
-
 </br>
+
+# Demos:
 
 ## Demo 1 | Infer developmental potential (DP) using expression matrix of scRNA-seq data
 
