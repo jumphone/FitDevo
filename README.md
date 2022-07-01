@@ -79,6 +79,8 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 Users should provide embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.).
 
 This demo is based on a "seurat.object" with normalized expression matrix and UMAP.
+
+To generate seurat.object, please refer to: https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
     
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
