@@ -77,6 +77,8 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 ## Demo 2 | Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
     
 Users should provide embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.).
+
+This demo is based on a "seurat.object" with normalized expression matrix and UMAP.
     
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
