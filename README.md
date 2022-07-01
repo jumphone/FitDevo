@@ -84,15 +84,15 @@ To generate seurat.object, please refer to: https://satijalab.org/seurat/article
     
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
-    # Step 1. prepare input files.
+    # Step 1. Prepare input files.
     MAT=as.matrix(seurat.object[['RNA']]@data)
     VEC=seurat.object@reductions$umap@cell.embeddings
     BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
     
-    # Step 2. infer developmental potential
+    # Step 2. Infer developmental potential
     DP=fitdevo(MAT, BGW, NORM=FALSE, PCNUM=50)
 
-    # Step 3. build developmental potential field (DPF) and draw arrows
+    # Step 3. Build developmental potential field (DPF) and draw arrows
     FIELD=fitdevo.field(DP=DP, VEC=VEC, SHOW=TRUE)
 
 
