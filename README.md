@@ -47,7 +47,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
     A vector of inferred DP
 
-## Demo 1 | infer developmental potential (DP) using expression matrix of scRNA-seq data
+## Demo 1 | Infer developmental potential (DP) using expression matrix of scRNA-seq data
 
     # R 4.0.3 
     
@@ -70,7 +70,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 
 
-## Demo 2 | build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
+## Demo 2 | Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
     
 Users should provide embedding coordinates(e.g. tSNE, UMAP, PAGA, etc.).
     
