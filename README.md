@@ -1,4 +1,4 @@
-<img src="https://github.com/jumphone/FitDevo/blob/main/img/logo.png?raw=true" width="250">
+<img src="https://gitee.com/jumphone/public/raw/master/img/logo.png" width="250">
 
 **FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight, Briefings in Bioinformatics, 2022, in press** 
 
@@ -130,7 +130,7 @@ The function named "fitdevo.field" partially follows the ideas of another tool n
     FIELD=fitdevo.field(DP=DP, VEC=VEC, SHOW=TRUE)
 
 
-<img src="https://github.com/jumphone/FitDevo/blob/main/img/f01_demo2_fitdevo.field.png?raw=true" width="300">
+<img src="https://gitee.com/jumphone/public/raw/master/img/f01_demo2_fitdevo.field.png" width="300">
 
 </br>
 </br>
