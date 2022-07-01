@@ -53,10 +53,6 @@ Users can use R to load the "RDS" file.
 
 </br>
 
-[Click back to the top](#content)
-
-</br>
-
 
 # Usage:
 
