@@ -112,7 +112,7 @@ Please install "igraph" and "stringr" before using "fitdevo.field"
 
 Users should provide the embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.). This demo is based on a "seurat.object" with a normalized expression matrix and an UMAP. To generate seurat.object, please refer to: https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
 
-The function named "fitdevo.field" partially follows the ideas of another tool (VECTOR, https://github.com/jumphone/Vector). If you are using this function in your work, please also cite: Unsupervised Inference of Developmental Directions for Single Cells Using VECTOR, Cell Reports, 2020, https://doi.org/10.1016/j.celrep.2020.108069.
+The function named "fitdevo.field" partially follows the ideas of another tool named VECTOR. If you are using this function in your work, please also cite: Unsupervised Inference of Developmental Directions for Single Cells Using VECTOR, Cell Reports, 2020, https://doi.org/10.1016/j.celrep.2020.108069, https://github.com/jumphone/Vector.
 
 </br>
 
