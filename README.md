@@ -39,7 +39,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 ## Input:
 
     MAT: expression matrix
-    BGW: binarized gene weight (BGW) ('https://gitee.com/jumphone/public/raw/master/BGW.rds' or 'https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true')
+    BGW: binarized gene weight (BGW) ('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true')
     NORM: whether to run "LogNormalize" in Seurat
     PCNUM: number of PCs used to calculate sample-specific gene weight (SSGW)
 
@@ -47,13 +47,12 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
     A vector of inferred DP
 
-## Demo:
+## Demo 1 - infer developmental potential (DP) using expression matrix of scRNA-seq data
 
     # R 4.0.3 
     
     # Step 1. Load FitDevo 
-    source('https://gitee.com/jumphone/public/raw/master/fitdevo.R') 
-    # or source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
+    source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
     # Step 2. Load data (the 1st sample in the testing dataset)
     data1 = readRDS('1.rds')
@@ -61,13 +60,33 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
     CorrectDP=data1$tag
     
     # Step 3. Load BGW
-    BGW=readRDS(url('https://gitee.com/jumphone/public/raw/master/BGW.rds')) 
-    # or BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
+    BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
     
     # Step 4. Run FitDevo
     DP=fitdevo(MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50)
     
     # Step 5. Evaluate the performance of FitDevo
     cor(DP, CorrectDP, method='spearman')  # 0.7980606
+
+
+
+## Demo 2 - build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
+    
+Users should provide embedding coordinates(e.g. tSNE, UMAP, PAGA, etc.).
+    
+    source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
+    
+    # Step 1. prepare input files.
+    MAT=as.matrix(seurat.object[['RNA']]@data)
+    VEC=seurat.object@reductions$umap@cell.embeddings
+    BGW=readRDS(url('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true'))
+    
+    # Step 2. infer developmental potential
+    DP=fitdevo(MAT, BGW, NORM=FALSE, PCNUM=50)
+
+    # Step 3. build developmental potential field (DPF) and draw arrows
+    FIELD=fitdevo.field(DP=DP, VEC=VEC, SHOW=TRUE)
+
+    
 
 
