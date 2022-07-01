@@ -51,6 +51,10 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
     
 --------------------------------------------------------------------------------------------------------------------
 
+## Demos:
+
+</br>
+
 ## Demo 1 | Infer developmental potential (DP) using expression matrix of scRNA-seq data
 
     # R 4.0.3 
@@ -79,6 +83,9 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 Users should provide the embedding coordinates (e.g. tSNE, UMAP, PAGA, etc.). This demo is based on a "seurat.object" with a normalized expression matrix and an UMAP. To generate seurat.object, please refer to: https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
 
 The function named "fitdevo.field" follows the ideas of another tool (VECTOR). If you are using this function in your work, please also cite: Unsupervised Inference of Developmental Directions for Single Cells Using VECTOR, Cell Reports, 2020, https://doi.org/10.1016/j.celrep.2020.108069.
+
+</br>
+</br>
 
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true')
     
