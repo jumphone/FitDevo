@@ -51,12 +51,20 @@ Users can use R to load the "RDS" file.
     # data1$tag is the reverse order of timepoint label (higher value indicates higher developmental potential).
     
 </br>
+</br>
+</br>
+</br>
+</br>
 
 # Requirements:
 
     R: 4.0.0+
     Seurat: 4.0+
 
+</br>
+</br>
+</br>
+</br>
 </br>
 
 
@@ -83,6 +91,11 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 </br>
 </br>
+</br>
+</br>
+</br>
+
+
 
 
 # Demos:
