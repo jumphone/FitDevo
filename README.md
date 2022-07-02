@@ -132,6 +132,8 @@ The function named "fitdevo.field" partially follows the ideas of another tool n
 
 <img src="https://gitee.com/jumphone/public/raw/master/img/f01_demo2_fitdevo.field.png" width="300">
 
+<img src="https://gitee.com/jumphone/public/raw/master/img/39E50314-8A5F-47F4-896B-0005C0059DE9.jpeg" width="300">
+
 </br>
 </br>
 
