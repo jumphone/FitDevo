@@ -52,18 +52,12 @@ Users can use R to load the "RDS" file.
     
 </br>
 </br>
-</br>
-</br>
-</br>
 
 # Requirements:
 
     R: 4.0.0+
     Seurat: 4.0+
 
-</br>
-</br>
-</br>
 </br>
 </br>
 
