@@ -129,10 +129,10 @@ The function named "fitdevo.field" partially follows the ideas of another tool n
     # Step 3. Build developmental potential field (DPF) and draw arrows
     FIELD=fitdevo.field(DP=DP, VEC=VEC, SHOW=TRUE)
 
-
-<img src="https://gitee.com/jumphone/public/raw/master/img/f01_demo2_fitdevo.field.png" width="300">
-
-<img src="https://gitee.com/jumphone/public/raw/master/img/39E50314-8A5F-47F4-896B-0005C0059DE9.jpeg" width="300">
+<p float="left">
+<img src="https://gitee.com/jumphone/public/raw/master/img/f01_demo2_fitdevo.field.png" width="250">
+<img src="https://gitee.com/jumphone/public/raw/master/img/39E50314-8A5F-47F4-896B-0005C0059DE9.jpeg" width="250">
+</p>
 
 </br>
 </br>
