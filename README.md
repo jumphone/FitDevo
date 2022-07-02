@@ -82,7 +82,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 </br>
 
-## Demo 1 - Infer developmental potential (DP) using expression matrix of scRNA-seq data
+### Demo 1 - Infer developmental potential (DP) using expression matrix of scRNA-seq data
 
     # R 4.0.3 
     
@@ -106,7 +106,7 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 </br>
 </br>
 
-## Demo 2 - Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
+### Demo 2 - Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
 
 Please install "igraph" and "stringr" before using "fitdevo.field"
 
