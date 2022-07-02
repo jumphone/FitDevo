@@ -24,7 +24,7 @@ This tool is designed for inferring the developmental potential (DP) of cells in
 * [Requirements](#requirements)
 * [Usage](#usage)
 
-## Demos:
+### Demos:
 
 * [Demo 1 - Infer developmental potential (DP) using expression matrix of scRNA-seq data](demo-1---infer-developmental-potential-dp-using-expression-matrix-of-scrna-seq-data)
 * [Demo 2 - Build developmental potential field (DPF) and draw arrows](demo-2---build-developmental-potential-field-dpf-and-draw-arrows--fitdevo--110-)
