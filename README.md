@@ -83,10 +83,6 @@ The input of FitDevo includes two files: BGW file and expression matrix. The BGW
 
 </br>
 </br>
-</br>
-</br>
-</br>
-
 
 
 
