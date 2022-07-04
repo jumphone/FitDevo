@@ -503,11 +503,11 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     NET = cbind(p1,p2) 
     g <- igraph::make_graph(t(NET),directed = FALSE)
     ALLNAME=paste0('P',1:CNUM)
-    ADD=ALLNAME[which(! ALLNAME %in% igraph::as_ids(V(g)))]
+    ADD=ALLNAME[which(! ALLNAME %in% igraph::as_ids(igraph::V(g)))]
     g <- g + ADD
     
     ##########################
-    DIST=igraph::distances(g, v = V(g), to = V(g), mode = c("all"))
+    DIST=igraph::distances(g, v = igraph::V(g), to = igraph::V(g), mode = c("all"))
     library(stringr)
     DIST.NUM=as.numeric(str_replace(colnames(DIST),'P',''))
     DIST=DIST[order(DIST.NUM),order(DIST.NUM)]
