@@ -403,7 +403,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
 
 .buildNet<-function(OUT, CUT=1, SHOW=FALSE, COL='grey70'){
     #########################################
-    library(igraph)
+    #library(igraph)
     library(stringr)
     ###########################################
     OUT=OUT
@@ -497,23 +497,23 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     
     ##########################
     
-    library(igraph)
+    #library(igraph)
     OUT$p1=p1
     OUT$p2=p2
     NET = cbind(p1,p2) 
-    g <- make_graph(t(NET),directed = FALSE)
+    g <- igraph::make_graph(t(NET),directed = FALSE)
     ALLNAME=paste0('P',1:CNUM)
-    ADD=ALLNAME[which(! ALLNAME %in% as_ids(V(g)))]
+    ADD=ALLNAME[which(! ALLNAME %in% igraph::as_ids(V(g)))]
     g <- g + ADD
     
     ##########################
-    DIST=distances(g, v = V(g), to = V(g), mode = c("all"))
+    DIST=igraph::distances(g, v = V(g), to = V(g), mode = c("all"))
     library(stringr)
     DIST.NUM=as.numeric(str_replace(colnames(DIST),'P',''))
     DIST=DIST[order(DIST.NUM),order(DIST.NUM)]
     ###########################
-    library(igraph)
-    CPT=components(g)
+    #library(igraph)
+    CPT=igraph::components(g)
     MAXC=which(CPT$csize==max(CPT$csize))[1]
     ############
     library(stringr)
