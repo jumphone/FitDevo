@@ -532,6 +532,18 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
         USED_INDEX=c(USED_INDEX,INDEX_LIST[[USED[i]]])
         i=i+1}
     
+    
+    ######################################
+    POINT_INDEX=rep(NA, nrow(VEC))
+    i=1
+    while(i<=length(INDEX_LIST)){
+        POINT_INDEX[INDEX_LIST[[i]]]=i
+        i=i+1
+        }
+
+
+    ###################
+    OUT$POINT.INDEX=POINT_INDEX
     ###################
     OUT$GRAPH=g
     OUT$DIST=DIST
