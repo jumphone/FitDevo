@@ -87,14 +87,11 @@ calScore <- function(MAT, GW){
 
 
 
-
-
-
-fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
+fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=50000){
     #################
     library(Seurat)
+    library(qlcMatrix)
     #################
-    
 
     #####################################################
     # Load data
@@ -106,25 +103,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
 
     ##########################################################
     # Solve big matrix
-    tooLargeLimit=50000
-    tooLargeLimitDelta=10000
-    #########################################################
-    if(ncol(MAT) > tooLargeLimit){
-        ############################
-        set.seed(123)
-        shuffle_index=permute::shuffle(ncol(MAT))
-        SH_MAT=MAT[,shuffle_index]
-        ############################
-        splitBy= (seq(ncol(SH_MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
-        lst = split(colnames(SH_MAT), splitBy)
-        #############################
-        result_shuffle = unlist(lapply(lst, function(x){fitdevo(SH_MAT[, x], BGW, NORM, PCNUM, VARGENE)}))
-        result=result_shuffle
-        result[shuffle_index]=result_shuffle
-        names(result)=colnames(MAT)
-        return(result)    
-    }else{
-
+    tooLargeLimit=tooLargeLimit
         
     #####################################################
     print('FitDevo starts !')
@@ -138,21 +117,38 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
     this_mat=.toUpper(MAT)
     NNN=min(c(PCNUM,ncol(this_mat)-1))
 
-    #####################################################
+    #############################################
     # Create Seurat object
     pbmc=CreateSeuratObject(counts = this_mat, min.cells = 0, min.features = 0, project = "ALL")
 
-    #####################################################
+    #############################################
     # Normalization
     if(NORM==TRUE){  
         pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+        
+        }
+
+    ##############################################   
+    NMAT=pbmc@assays$RNA@data
+    NCOL=ncol(MAT)
+
+
+    ###################################################################
+    ###################################################################
+    # Calculate SSGW - START
+
+    ################################################
+    if(NCOL > tooLargeLimit){
+        print('Cell number is larger than tooLargeLimit. Conduct down-sampling...')
+        set.seed(123)
+        used_index=sample(c(1:NCOL), tooLargeLimit)
+        pbmc=subset(pbmc, cells=colnames(pbmc)[used_index])
         }
 
     #####################################################
     print('Calculating PCs ... ')
     #####################################################
     # Calculate PCs
-    #pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = 2000)
     pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = VARGENE)
     pbmc <- ScaleData(object = pbmc, features =VariableFeatures(pbmc))
     pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=123)
@@ -162,7 +158,9 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
     print('Calculating gene-PC correlation matrix ... ')
     #####################################################
     # Calculate gene-PC correlation matrix
+    options(warn=-1)
     LOAD=cor(t(as.matrix(pbmc@assays$RNA@data)), PCA) 
+    options(warn=1)
     LOAD[which(is.na(LOAD))]=0
 
     #####################################################
@@ -183,12 +181,19 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
     names(pBGW)=names(PRED.Y)
     SSGW=pBGW+Y
     
+    #######################
+    # Calculate SSGW - END
+    ###################################################################
+    ###################################################################
+
+
     #####################################################
     print('Calculating DP ... ')
     #####################################################
     # Calculate developmental potential (DP) score
-    NMAT=as.matrix(pbmc@assays$RNA@data)
-    DP=calScore(NMAT, SSGW)
+    options(warn=-1)
+    DP=as.vector(corSparse(NMAT[match(names(SSGW), rownames(NMAT)), ], Matrix(matrix(SSGW, ncol = 1))))
+    options(warn=1)
     ###########################
 
     #######################################
@@ -197,8 +202,18 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
     print(Sys.time())
     #######################################
     return(DP)
+    
     }
-    }
+
+
+
+
+
+
+
+
+
+
 
 
 
