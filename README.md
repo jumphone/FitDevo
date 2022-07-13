@@ -56,6 +56,7 @@ Users can use R to load the "RDS" file.
 
     R: 4.0.0+
     Seurat: 4.0+
+    qlcMatrix: 0.9.7
 
 </br>
 
