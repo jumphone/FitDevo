@@ -10,9 +10,9 @@ This tool is designed for inferring the developmental potential (DP) of cells in
 
 # Updates:
 
-**2022.07.13, v1.2.0 - Higher speed!** Improve the computational efficiency by using "qlcMatrix".
+**2022.07.13, v1.2.0 - Higher speed !** Improve the computational efficiency by using "qlcMatrix".
 
-**2022.07.01, v1.1.0 - New features!** Users can use "fitdevo.field" to build developmental potential field (DPF) and draw arrows.
+**2022.07.01, v1.1.0 - New features !** Users can use "fitdevo.field" to build developmental potential field (DPF) and draw arrows.
 
 **2022.06.30, v1.0.1 - Paper version.** The details of this version is described in our BIB (2022) paper.
 
