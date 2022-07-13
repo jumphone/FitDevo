@@ -87,7 +87,7 @@ calScore <- function(MAT, GW){
 
 
 
-fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=50000){
+fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=50000, SS=TRUE, DETAIL=FALSE){
     #################
     library(Seurat)
     library(qlcMatrix)
@@ -100,6 +100,8 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     NORM=NORM
     PCNUM=PCNUM
     VARGENE=VARGENE
+    SS=SS
+    DETAIL=DETAIL
 
     ##########################################################
     # Solve big matrix
@@ -129,71 +131,86 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
 
     ##############################################   
     NMAT=pbmc@assays$RNA@data
-    NCOL=ncol(MAT)
+    NCOL=ncol(NMAT)
+    USED_GW=BGW
+    USED_GW=USED_GW[which(names(USED_GW) %in% rownames(NMAT))]
 
-    ###################################################################
-    ###################################################################
-    # Calculate SSGW - START
 
-    ################################################
-    if(NCOL > tooLargeLimit){
-        print('Cell number is larger than tooLargeLimit. Conduct down-sampling...')
-        set.seed(123)
-        used_index=sample(c(1:NCOL), tooLargeLimit)
-        pbmc=subset(pbmc, cells=colnames(pbmc)[used_index])
+    if(SS==TRUE){
+
+        ###################################################################
+        ###################################################################
+        # Calculate SSGW - START
+
+        ################################################
+        if(NCOL > tooLargeLimit){
+            ############################
+            print('Cell number is larger than tooLargeLimit. Conduct down-sampling...')
+            print('Cell number:')
+            print(NCOL)
+            print('tooLargeLimit:')
+            print(tooLargeLimit)
+            ############################
+            set.seed(123)
+            used_index=sample(c(1:NCOL), tooLargeLimit)
+            pbmc=subset(pbmc, cells=colnames(pbmc)[used_index])
+            }
+
+        
+        #####################################################
+        print('Calculating PCs ... ')
+        #####################################################
+        # Calculate PCs
+        pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = VARGENE)
+        pbmc <- ScaleData(object = pbmc, features =VariableFeatures(pbmc))
+        ####################################
+        NNN=min(c(PCNUM,ncol(pbmc)-1))
+        pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=123)
+        ####################################
+        PCA=pbmc@reductions$pca@cell.embeddings
+
+        #####################################################
+        print('Calculating gene-PC correlation matrix ... ')
+        #####################################################
+        # Calculate gene-PC correlation matrix
+        options(warn=-1) 
+        LOAD=Matrix(corSparse(Matrix::t(pbmc@assays$RNA@data), Matrix(PCA)))
+        rownames(LOAD)=rownames(pbmc@assays$RNA@data)
+        colnames(LOAD)=colnames(PCA)
+        options(warn=1)
+        LOAD[which(is.na(LOAD))]=0
+
+        #####################################################
+        print('Calculating SSGW ... ')
+        #####################################################
+        # Use GLM to get pBGW and SSGW
+        COM=.simple_combine(cbind(USED_GW, USED_GW),LOAD)
+        D1=COM$exp_sc_mat1
+        D2=COM$exp_sc_mat2
+        #################
+        Y=D1[,1]
+        X=D2
+        FIT=glm(Y~.,data=as.data.frame(X),family=binomial(link = "logit"))
+        #################
+        PRED.Y=predict(FIT,data=as.data.frame(X))
+        pBGW=rep(0,length(PRED.Y))
+        pBGW[which(PRED.Y>0)]=1
+        names(pBGW)=names(PRED.Y)
+        SSGW=pBGW+Y
+        USED_GW=SSGW
+        #######################
+        # Calculate SSGW - END
+        ###################################################################
+        ###################################################################
+
         }
-
-    
-    #####################################################
-    print('Calculating PCs ... ')
-    #####################################################
-    # Calculate PCs
-    pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = VARGENE)
-    pbmc <- ScaleData(object = pbmc, features =VariableFeatures(pbmc))
-    ####################################
-    NNN=min(c(PCNUM,ncol(pbmc)-1))
-    pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=123)
-    ####################################
-    PCA=pbmc@reductions$pca@cell.embeddings
-
-    #####################################################
-    print('Calculating gene-PC correlation matrix ... ')
-    #####################################################
-    # Calculate gene-PC correlation matrix
-    options(warn=-1)
-    LOAD=cor(t(as.matrix(pbmc@assays$RNA@data)), PCA) 
-    options(warn=1)
-    LOAD[which(is.na(LOAD))]=0
-
-    #####################################################
-    print('Calculating SSGW ... ')
-    #####################################################
-    # Use GLM to get pBGW and SSGW
-    COM=.simple_combine(cbind(BGW,BGW),LOAD)
-    D1=COM$exp_sc_mat1
-    D2=COM$exp_sc_mat2
-    #################
-    Y=D1[,1]
-    X=D2
-    FIT=glm(Y~.,data=as.data.frame(X),family=binomial(link = "logit"))
-    #################
-    PRED.Y=predict(FIT,data=as.data.frame(X))
-    pBGW=rep(0,length(PRED.Y))
-    pBGW[which(PRED.Y>0)]=1
-    names(pBGW)=names(PRED.Y)
-    SSGW=pBGW+Y
-    
-    #######################
-    # Calculate SSGW - END
-    ###################################################################
-    ###################################################################
 
     #####################################################
     print('Calculating DP ... ')
     #####################################################
     # Calculate developmental potential (DP) score
     options(warn=-1)
-    DP=as.vector(corSparse(NMAT[match(names(SSGW), rownames(NMAT)), ], Matrix(matrix(SSGW, ncol = 1))))
+    DP=as.vector(corSparse(NMAT[match(names(USED_GW), rownames(NMAT)), ], Matrix(matrix(USED_GW, ncol = 1))))
     options(warn=1)
     ###########################
 
@@ -202,8 +219,26 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     #######################################
     print(Sys.time())
     #######################################
-    return(DP)
-    
+    if(DETAIL==TRUE){
+
+        OUT=list()
+        OUT$DP=DP
+        OUT$USED_GW=USED_GW
+        OUT$parameters=list()
+        OUT$parameters$NORM=NORM
+        OUT$parameters$PCNUM=PCNUM
+        OUT$parameters$VARGENE=VARGENE
+        OUT$parameters$SS=SS
+        OUT$parameters$DETAIL=DETAIL
+        OUT$parameters$tooLargeLimit=tooLargeLimit
+        return(OUT)
+
+        }else{
+
+        return(DP)
+
+        }
+    ##########################################
     }
 
 
