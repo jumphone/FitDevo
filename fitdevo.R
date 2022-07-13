@@ -111,7 +111,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     if(ncol(MAT) > tooLargeLimit){
         ############################
         set.seed(123)
-        shuffle_index=shuffle(ncol(MAT))
+        shuffle_index=permute::shuffle(ncol(MAT))
         SH_MAT=MAT[,shuffle_index]
         ############################
         splitBy= (seq(ncol(SH_MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
