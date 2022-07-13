@@ -132,7 +132,6 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     NMAT=pbmc@assays$RNA@data
     NCOL=ncol(MAT)
 
-
     ###################################################################
     ###################################################################
     # Calculate SSGW - START
@@ -185,7 +184,6 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     # Calculate SSGW - END
     ###################################################################
     ###################################################################
-
 
     #####################################################
     print('Calculating DP ... ')
