@@ -90,7 +90,7 @@ calScore <- function(MAT, GW){
 
 
 
-fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
+fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000){
     #################
     library(Seurat)
     #################
@@ -102,6 +102,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     BGW=BGW  
     NORM=NORM
     PCNUM=PCNUM
+    VARGENE=VARGENE
 
     ##########################################################
     # Solve big matrix
@@ -117,7 +118,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
         splitBy= (seq(ncol(SH_MAT))-1) %/% (tooLargeLimit - tooLargeLimitDelta)
         lst = split(colnames(SH_MAT), splitBy)
         #############################
-        result_shuffle = unlist(lapply(lst, function(x){fitdevo(SH_MAT[, x], BGW, NORM, PCNUM)}))
+        result_shuffle = unlist(lapply(lst, function(x){fitdevo(SH_MAT[, x], BGW, NORM, PCNUM, VARGENE)}))
         result=result_shuffle
         result[shuffle_index]=result_shuffle
         names(result)=colnames(MAT)
@@ -151,7 +152,8 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50){
     print('Calculating PCs ... ')
     #####################################################
     # Calculate PCs
-    pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = 2000)
+    #pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = 2000)
+    pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = VARGENE)
     pbmc <- ScaleData(object = pbmc, features =VariableFeatures(pbmc))
     pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=123)
     PCA=pbmc@reductions$pca@cell.embeddings
