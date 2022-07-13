@@ -67,7 +67,7 @@ Users can use R to load the "RDS" file.
 
     fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
     
-The input of FitDevo includes two files: BGW file and expression matrix. The BGW file is provided by us, while the expression matrix is provided by users. The row and column names of the expression matrix are gene and cell names, respectively. FitDevo can help users to normalize the raw read count by setting the “NORM” parameter to “TRUE”, or users can use “LogNormalize” function in Seurat to conduct normalization. The output of FitDevo is a vector containing the inferred DP of all cells.
+The input of FitDevo includes two files: BGW file and expression matrix. The BGW file is provided by us, while the expression matrix is provided by users (should not be scaled). The row and column names of the expression matrix are gene and cell names, respectively. FitDevo can help users to normalize the raw read count by setting the “NORM” parameter to “TRUE”, or users can use “LogNormalize” function in Seurat to conduct normalization. The output of FitDevo is a vector containing the inferred DP of all cells.
 
 ### Input:
 
