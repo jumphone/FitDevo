@@ -87,7 +87,7 @@ calScore <- function(MAT, GW){
 
 
 
-fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=50000, SS=TRUE, DETAIL=FALSE){
+fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=50000, SEED=123, SS=TRUE, DETAIL=FALSE){
     #################
     library(Seurat)
     library(qlcMatrix)
@@ -102,7 +102,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     VARGENE=VARGENE
     SS=SS
     DETAIL=DETAIL
-
+    SEED=SEED
     ##########################################################
     # Solve big matrix
     tooLargeLimit=tooLargeLimit
@@ -125,8 +125,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     #############################################
     # Normalization
     if(NORM==TRUE){  
-        pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
-        
+        pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000) 
         }
 
     ##############################################   
@@ -154,7 +153,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
             print('tooLargeLimit:')
             print(tooLargeLimit)
             ############################
-            set.seed(123)
+            set.seed(SEED)
             used_index=sample(c(1:NCOL), tooLargeLimit)
             pbmc=subset(pbmc, cells=colnames(pbmc)[used_index])
             }
@@ -234,6 +233,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
         OUT$parameters$SS=SS
         OUT$parameters$DETAIL=DETAIL
         OUT$parameters$tooLargeLimit=tooLargeLimit
+        OUT$parameters$SEED=SEED
         return(OUT)
 
         }else{
