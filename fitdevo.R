@@ -63,7 +63,8 @@ library(Seurat)
     mat=mat[which(rownames(mat)!=''),]
     pbmc=CreateSeuratObject(counts = mat, min.cells = 0, min.features = 0, project = "ALL")
     pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
-    this_out=as.matrix(pbmc@assays$RNA@data)
+    #this_out=as.matrix(pbmc@assays$RNA@data)
+    this_out=pbmc@assays$RNA@data
     return(this_out)
     }
 
