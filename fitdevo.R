@@ -134,7 +134,10 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     NCOL=ncol(NMAT)
     USED_GW=BGW
     USED_GW=USED_GW[which(names(USED_GW) %in% rownames(NMAT))]
-
+    
+    ################################
+    if(length(unique(USED_GW))==1){stop('GW is not suitable !!!')}
+    ################################
 
     if(SS==TRUE){
 
