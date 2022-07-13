@@ -115,7 +115,6 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
     
     # Preprocess
     this_mat=.toUpper(MAT)
-    NNN=min(c(PCNUM,ncol(this_mat)-1))
 
     #############################################
     # Create Seurat object
@@ -144,13 +143,17 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
         pbmc=subset(pbmc, cells=colnames(pbmc)[used_index])
         }
 
+    
     #####################################################
     print('Calculating PCs ... ')
     #####################################################
     # Calculate PCs
     pbmc <- FindVariableFeatures(object =pbmc, selection.method = "vst", nfeatures = VARGENE)
     pbmc <- ScaleData(object = pbmc, features =VariableFeatures(pbmc))
+    ####################################
+    NNN=min(c(PCNUM,ncol(pbmc)-1))
     pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=123)
+    ####################################
     PCA=pbmc@reductions$pca@cell.embeddings
 
     #####################################################
@@ -764,8 +767,6 @@ fitdevo.field<-function(DP, VEC,COL=NULL, N=25, CUT=1, P=0.9, CEX=0.5, LWD=1.5, 
     this_field=.drawArrow(this_field, P=P, SHOW=TOSHOW, COL=COL, CEX=CEX, LWD=LWD, AL=AL)
     return(this_field)
     }
-
-
 
 
 
