@@ -915,7 +915,9 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE,SEED=123){
     #################################
     this_pca=pbmc@reductions$pca@cell.embeddings
 
-    this_weight=(1-.norm1(pbmc$dp))
+    #this_weight=(1-.norm1(pbmc$dp))
+    this_weight=1-pbmc$dp
+    
     this_pca=this_pca * this_weight
 
     #############################################
