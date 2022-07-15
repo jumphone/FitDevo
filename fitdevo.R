@@ -864,6 +864,7 @@ fitdevo.field<-function(DP, VEC,COL=NULL, N=25, CUT=1, P=0.9, CEX=0.5, LWD=1.5, 
     }
 
 
+
 comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
     MAT=MAT
     DP=DP
@@ -908,20 +909,27 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
     pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000) 
     all.genes=rownames(pbmc)
     pbmc <- ScaleData(object = pbmc, features = all.genes)
-    pbmc <- RunPCA(object = pbmc, seed.use=123, npcs=PCNUM, features = all.genes, ndims.print=1,nfeatures.print=1)
+    pbmc <- RunPCA(object = pbmc, seed.use=123, npcs=PCNUM+1, features = all.genes, ndims.print=1,nfeatures.print=1)
 
     #################################
     this_pca=pbmc@reductions$pca@cell.embeddings
 
     this_weight=(1-.norm1(pbmc$dp))
     this_pca=this_pca * this_weight
-    
+
+    #############################################
+    this_pca[,ncol(this_pca)]=pbmc$dp
+    this_pca=apply(this_pca,2,scale, center=FALSE)
+
+    ##############################################
     rownames(this_pca)=rownames(pbmc@reductions$pca@cell.embeddings)
     colnames(this_pca)=colnames(pbmc@reductions$pca@cell.embeddings)
+
+    #############################################
     pbmc@reductions$pca@cell.embeddings=this_pca
 
     ##################################
-    pbmc <- RunUMAP(pbmc, dims = 1:PCNUM, seed.use = 123,n.components=2)  
+    pbmc <- RunUMAP(pbmc, dims = 1:(PCNUM+1), seed.use = 123,n.components=2)  
     #DimPlot(pbmc,label=TRUE)+NoLegend()
     #FeaturePlot(pbmc,features=c('dp'))
 
@@ -930,6 +938,8 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
     return(pbmc)
 
     }
+
+
 
 
 
