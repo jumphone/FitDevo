@@ -931,7 +931,7 @@ comdevo<-function(MAT, REF, DP=NULL,  PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
     pbmc@reductions$pca@cell.embeddings=this_pca
 
     ##################################
-    pbmc <- RunUMAP(pbmc, dims = 1:(PCNUM+1), seed.use = SEED, n.components=2)  
+    pbmc <- RunUMAP(pbmc, dims = 1:PCNUM, seed.use = SEED, n.components=2)  
     
     #DimPlot(pbmc,label=TRUE)+NoLegend()
     #FeaturePlot(pbmc,features=c('dp'))
