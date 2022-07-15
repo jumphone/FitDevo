@@ -866,7 +866,7 @@ fitdevo.field<-function(DP, VEC,COL=NULL, N=25, CUT=1, P=0.9, CEX=0.5, LWD=1.5, 
 
 
 
-comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
+comdevo<-function(MAT, REF, DP=NULL,  PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
     MAT=MAT
     DP=DP
     REF=REF
@@ -874,6 +874,8 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
     PCNUM=PCNUM
     SEED=SEED
     MAXDP=MAXDP
+    ###########################################
+    if(is.null(DP)){DP=rep(0,ncol(MAT))}
     ############################################
     library(Seurat)
     library(qlcMatrix)
@@ -940,8 +942,6 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
     return(pbmc)
 
     }
-
-
 
 
 
