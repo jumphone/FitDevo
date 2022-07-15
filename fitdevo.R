@@ -935,7 +935,7 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE,SEED=123){
     #FeaturePlot(pbmc,features=c('dp'))
 
     ##################################
-    DefaultAssay(pbmc)='RNA'
+    #DefaultAssay(pbmc)='RNA'
     return(pbmc)
 
     }
