@@ -865,12 +865,13 @@ fitdevo.field<-function(DP, VEC,COL=NULL, N=25, CUT=1, P=0.9, CEX=0.5, LWD=1.5, 
 
 
 
-comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
+comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE,SEED=123){
     MAT=MAT
     DP=DP
     REF=REF
     NORM=NORM
     PCNUM=PCNUM
+    SEED=SEED
     ############################################
     library(Seurat)
     library(qlcMatrix)
@@ -909,7 +910,7 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
     pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000) 
     all.genes=rownames(pbmc)
     pbmc <- ScaleData(object = pbmc, features = all.genes)
-    pbmc <- RunPCA(object = pbmc, seed.use=123, npcs=PCNUM+1, features = all.genes, ndims.print=1,nfeatures.print=1)
+    pbmc <- RunPCA(object = pbmc, seed.use=SEED, npcs=PCNUM+1, features = all.genes, ndims.print=1,nfeatures.print=1)
 
     #################################
     this_pca=pbmc@reductions$pca@cell.embeddings
@@ -929,7 +930,7 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
     pbmc@reductions$pca@cell.embeddings=this_pca
 
     ##################################
-    pbmc <- RunUMAP(pbmc, dims = 1:(PCNUM+1), seed.use = 123,n.components=2)  
+    pbmc <- RunUMAP(pbmc, dims = 1:(PCNUM+1), seed.use = SEED, n.components=2)  
     #DimPlot(pbmc,label=TRUE)+NoLegend()
     #FeaturePlot(pbmc,features=c('dp'))
 
@@ -938,6 +939,7 @@ comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
     return(pbmc)
 
     }
+
 
 
 
