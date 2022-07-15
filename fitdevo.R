@@ -810,3 +810,130 @@ fitdevo.field<-function(DP, VEC,COL=NULL, N=25, CUT=1, P=0.9, CEX=0.5, LWD=1.5, 
 
 
 
+
+
+
+#########################
+# 2022.7.15
+##########################
+
+
+.simple_match <-function(exp_sc_mat1, exp_sc_mat2, FILL=FALSE){
+    FILL=FILL
+    exp_sc_mat=exp_sc_mat1
+    exp_ref_mat=exp_sc_mat2
+    ##############################################
+    if(FILL==TRUE){
+        gene1=rownames(exp_sc_mat)
+        gene2=rownames(exp_ref_mat)
+        gene12=gene2[which(!gene2 %in% gene1)]
+        gene21=gene1[which(!gene1 %in% gene2)]
+        exp_sc_mat_add=matrix(0,ncol=ncol(exp_sc_mat),nrow=length(gene12))
+        rownames(exp_sc_mat_add)=gene12
+        colnames(exp_sc_mat_add)=colnames(exp_sc_mat)
+        exp_ref_mat_add=matrix(0,ncol=ncol(exp_ref_mat),nrow=length(gene21))
+        rownames(exp_ref_mat_add)=gene21
+        colnames(exp_ref_mat_add)=colnames(exp_ref_mat)
+        exp_sc_mat=rbind(exp_sc_mat, exp_sc_mat_add)
+        exp_ref_mat=rbind(exp_ref_mat, exp_ref_mat_add)
+    }
+    ############################################
+    exp_sc_mat=exp_sc_mat[order(rownames(exp_sc_mat)),]
+    exp_ref_mat=exp_ref_mat[order(rownames(exp_ref_mat)),]
+    gene_sc=rownames(exp_sc_mat)
+    gene_ref=rownames(exp_ref_mat)
+    gene_over= gene_sc[which(gene_sc %in% gene_ref)]
+    exp_sc_mat=exp_sc_mat[which(gene_sc %in% gene_over),]
+    exp_ref_mat=exp_ref_mat[which(gene_ref %in% gene_over),]
+    colname_sc=colnames(exp_sc_mat)
+    colname_ref=colnames(exp_ref_mat)
+    OUT=list()
+    OUT$exp_sc_mat1=exp_sc_mat
+    OUT$exp_sc_mat2=exp_ref_mat
+    return(OUT)
+    }
+
+
+.norm1<-function(x){
+    if(min(x)!=max(x)){
+        y=(x-min(x))/(max(x)-min(x))
+       }else{
+        y=rep(0,length(x))
+       }
+    return(y)
+    }
+
+
+comdevo<-function(MAT, DP, REF, PCNUM=5, NORM=TRUE){
+    MAT=MAT
+    DP=DP
+    REF=REF
+    NORM=NORM
+    PCNUM=PCNUM
+    ############################################
+    library(Seurat)
+    library(qlcMatrix)
+    ###########################################
+    REF.UP=.toUpper(REF)
+    ###########################################
+    #############################################
+    # Create Seurat object
+    pbmc=CreateSeuratObject(counts = MAT, min.cells = 0, min.features = 0, project = "ALL")
+    pbmc$dp=DP
+
+    #############################################
+    # Normalization
+    if(NORM==TRUE){  
+        pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000) 
+        }
+
+    #################################################
+    NMAT=pbmc@assays$RNA@data
+    NCOL=ncol(NMAT)
+    NMAT.UP=.toUpper(NMAT)
+    ####################################################
+     
+    MATCH=.simple_match(REF.UP, NMAT.UP)
+    D1=MATCH$exp_sc_mat1
+    D2=MATCH$exp_sc_mat2
+
+    PCC.MAT=Matrix(corSparse(Matrix(D1),Matrix(D2)))
+    rownames(PCC.MAT)=colnames(D1)
+    colnames(PCC.MAT)=colnames(D2)
+    INPUT=(PCC.MAT+1) *50
+
+    ####################################################
+    pbmc[["PCC"]] <- CreateAssayObject(counts = INPUT )
+    DefaultAssay(pbmc)='PCC'
+    pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000) 
+    all.genes=rownames(pbmc)
+    pbmc <- ScaleData(object = pbmc, features = all.genes)
+    pbmc <- RunPCA(object = pbmc, seed.use=123, npcs=PCNUM, features = all.genes, ndims.print=1,nfeatures.print=1)
+
+    #################################
+    this_pca=pbmc@reductions$pca@cell.embeddings
+
+    this_weight=(1-.norm1(pbmc$dp))
+    this_pca=this_pca * this_weight
+    
+    rownames(this_pca)=rownames(pbmc@reductions$pca@cell.embeddings)
+    colnames(this_pca)=colnames(pbmc@reductions$pca@cell.embeddings)
+    pbmc@reductions$pca@cell.embeddings=this_pca
+
+    ##################################
+    pbmc <- RunUMAP(pbmc, dims = 1:PCNUM, seed.use = 123,n.components=2)  
+    #DimPlot(pbmc,label=TRUE)+NoLegend()
+    #FeaturePlot(pbmc,features=c('dp'))
+
+    ##################################
+    DefaultAssay(pbmc)='RNA'
+    return(pbmc)
+
+    }
+
+
+
+
+
+
+
