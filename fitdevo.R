@@ -167,7 +167,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
         pbmc <- ScaleData(object = pbmc, features =VariableFeatures(pbmc))
         ####################################
         NNN=min(c(PCNUM,ncol(pbmc)-1))
-        pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=123)
+        pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=SEED)
         ####################################
         PCA=pbmc@reductions$pca@cell.embeddings
 
