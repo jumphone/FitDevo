@@ -4,6 +4,8 @@
 
 **Briefings in Bioinformatics, 2022, [paper](https://doi.org/10.1093/bib/bbac293)** 
 
+[Supplementary Figure and Table](https://github.com/jumphone/FitDevo/tree/main/sup)
+
 This tool is designed for inferring the developmental potential (DP) of cells in scRNA-seq data
 
 
