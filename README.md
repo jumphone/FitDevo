@@ -81,7 +81,7 @@ The input of FitDevo includes two files: a BGW list and an expression matrix. Th
 
     MAT: expression matrix
     BGW: binarized gene weight (BGW) ('https://github.com/jumphone/FitDevo/blob/main/BGW.rds?raw=true')
-    NORM: whether to run "LogNormalize" in Seurat
+    NORM: whether to conduct normalization
     PCNUM: number of PCs used to calculate sample-specific gene weight (SSGW)
 
 ### Output:
