@@ -61,6 +61,11 @@ Users can use R to load the "RDS" file.
     Seurat: 4.0+
     qlcMatrix: 0.9.7
 
+R: https://www.r-project.org/
+Seurat: https://satijalab.org/seurat/articles/install.html
+qlcMatrix: install.packages("qlcMatrix") or https://cran.r-project.org/web/packages/qlcMatrix/index.html
+
+
 </br>
 
 
