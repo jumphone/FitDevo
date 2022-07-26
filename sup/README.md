@@ -1,2 +1,2 @@
-Here are the word and PDF versions of our supplementary files.
+Here are the Word and PDF versions of our supplementary files.
 
