@@ -65,7 +65,10 @@ R: https://www.r-project.org/
 
 Seurat: https://satijalab.org/seurat/articles/install.html
 
-qlcMatrix: install.packages("qlcMatrix") or https://cran.r-project.org/web/packages/qlcMatrix/index.html
+qlcMatrix: https://cran.r-project.org/web/packages/qlcMatrix/index.html
+
+    install.packages("Seurat") 
+    install.packages("qlcMatrix")
 
 
 </br>
