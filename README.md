@@ -1,8 +1,8 @@
 <img src="https://gitee.com/jumphone/public/raw/master/img/logo.png" width="250">
 
-**FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight**
+**FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight**, ***Briefings in Bioinformatics*, 2022
 
-***Briefings in Bioinformatics*, 2022, Paper Link: [https://doi.org/10.1093/bib/bbac293](https://doi.org/10.1093/bib/bbac293) | [Supplementary Files](https://github.com/jumphone/FitDevo/tree/main/sup)**
+Paper Link: [https://doi.org/10.1093/bib/bbac293](https://doi.org/10.1093/bib/bbac293) | [Supplementary Files](https://github.com/jumphone/FitDevo/tree/main/sup)**
 
 This tool is designed for inferring the developmental potential (DP) of cells in scRNA-seq data
 
