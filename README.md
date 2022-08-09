@@ -79,7 +79,6 @@ qlcMatrix: https://cran.r-project.org/web/packages/qlcMatrix/index.html
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true') 
     # or source('https://gitee.com/jumphone/fit-devo-1.2.0/raw/main/fitdevo.R')
 
-
     fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
     
 The input of FitDevo includes two files: a BGW list and an expression matrix. The BGW list is provided by us, while the expression matrix is provided by users (should not be scaled). The row and column names of the expression matrix are genes and cell names, respectively. FitDevo can help users to normalize the raw read count by setting the “NORM” parameter to “TRUE”, or users can use “LogNormalize” function in Seurat to conduct normalization. The output of FitDevo is a vector containing the inferred DP of all cells.
