@@ -1,4 +1,4 @@
-<img src="https://gitee.com/jumphone/public/raw/master/img/logo.png" width="250">
+<img src="https://fzhang.bioinfo-lab.com/img/tools/logo_fitdevo.png" width="250">
 
 **FitDevo: accurate inference of single-cell developmental potential using sample-specific gene weight**, ***Briefings in Bioinformatics*, 2022**
 
