@@ -165,7 +165,7 @@ The function named "fitdevo.field" partially follows the idea of another tool na
     # Step 3. Build developmental potential field (DPF) and draw arrows
     FIELD=fitdevo.field(DP=DP, VEC=VEC, SHOW=TRUE)
     
-    # Colar scale
+    # Coler scale
     plot(x=FIELD$VALUE,y=rep(1,length(FIELD$VALUE)),col=FIELD$POINT.COL,type='h',lwd=2,ylim=c(0,1))
     
 <p float="left">
