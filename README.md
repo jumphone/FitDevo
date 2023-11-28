@@ -139,7 +139,7 @@ The input of FitDevo includes two files: a BGW list and an expression matrix. Th
 </br>
 
 
-## Demo 2 - Build developmental potential field (DPF) and draw arrows ( fitdevo >= 1.1.0 )
+## Demo 2 - Build developmental potential field (DPF) and draw arrows ( latest version of FitDevo )
 
 ### Please install "igraph" and "stringr" before using "fitdevo.field"
 
