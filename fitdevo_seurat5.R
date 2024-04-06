@@ -63,8 +63,7 @@ library(Seurat)
     mat=mat[which(rownames(mat)!=''),]
     pbmc=CreateSeuratObject(counts = mat, min.cells = 0, min.features = 0, project = "ALL")
     pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
-    #this_out=as.matrix(pbmc@assays$RNA@data)
-    this_out=pbmc@assays$RNA@data
+    this_out=GetAssayData(object = pbmc, assay = "RNA", slot = "data")
     return(this_out)
     }
 
@@ -129,7 +128,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
         }
 
     ##############################################   
-    NMAT=pbmc@assays$RNA@data
+    NMAT=GetAssayData(object = pbmc, assay = "RNA", slot = "data")
     NCOL=ncol(NMAT)
     USED_GW=BGW
     USED_GW=USED_GW[which(names(USED_GW) %in% rownames(NMAT))]
@@ -176,8 +175,8 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
         #####################################################
         # Calculate gene-PC correlation matrix
         options(warn=-1) 
-        LOAD=Matrix(corSparse(Matrix::t(pbmc@assays$RNA@data), Matrix(PCA)))
-        rownames(LOAD)=rownames(pbmc@assays$RNA@data)
+        LOAD=Matrix(corSparse(Matrix::t(GetAssayData(object = pbmc, assay = "RNA", slot = "data")), Matrix(PCA)))
+        rownames(LOAD)=rownames(GetAssayData(object = pbmc, assay = "RNA", slot = "data"))
         colnames(LOAD)=colnames(PCA)
         options(warn=1)
         LOAD[which(is.na(LOAD))]=0
