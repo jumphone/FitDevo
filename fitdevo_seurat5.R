@@ -168,7 +168,7 @@ fitdevo<-function(MAT, BGW, NORM=TRUE, PCNUM=50, VARGENE=2000, tooLargeLimit=500
         NNN=min(c(PCNUM,ncol(pbmc)-1))
         pbmc <- RunPCA(object = pbmc, npcs=NNN, features = VariableFeatures(pbmc) , ndims.print=1,nfeatures.print=1, seed.use=SEED)
         ####################################
-        PCA=pbmc@reductions$pca@cell.embeddings
+        PCA=Embeddings(pbmc, reduction = "pca")
 
         #####################################################
         print('Calculating gene-PC correlation matrix ... ')
@@ -915,7 +915,7 @@ comdevo<-function(MAT, REF, DP=NULL,  PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
     pbmc <- RunPCA(object = pbmc, seed.use=SEED, npcs=PCNUM, features = all.genes, ndims.print=1,nfeatures.print=1)
 
     #################################
-    this_pca=pbmc@reductions$pca@cell.embeddings
+    this_pca=Embeddings(pbmc, reduction = "pca")
 
     this_weight=MAXDP-pbmc$dp
     this_pca=this_pca * this_weight
@@ -923,11 +923,11 @@ comdevo<-function(MAT, REF, DP=NULL,  PCNUM=5, NORM=TRUE, SEED=123, MAXDP=1){
     #############################################
 
     ##############################################
-    rownames(this_pca)=rownames(pbmc@reductions$pca@cell.embeddings)
-    colnames(this_pca)=colnames(pbmc@reductions$pca@cell.embeddings)
+    rownames(this_pca)=rownames(Embeddings(pbmc, reduction = "pca"))
+    colnames(this_pca)=colnames(Embeddings(pbmc, reduction = "pca"))
 
     #############################################
-    pbmc@reductions$pca@cell.embeddings=this_pca
+    Embeddings(pbmc, reduction = "pca")=this_pca
 
     ##################################
     pbmc <- RunUMAP(pbmc, dims = 1:PCNUM, seed.use = SEED, n.components=2)  
