@@ -58,7 +58,7 @@ Users can use R to load the "RDS" file.
 # Requirements:
 
     R: 4.0.0+
-    Seurat: v4
+    Seurat: v4 (the original fitdevo only supports Seurat v4)
     qlcMatrix: 0.9.7
 
 FitDevo for Seurat v5: https://github.com/jumphone/FitDevo/blob/main/fitdevo_seurat5.R
@@ -68,13 +68,16 @@ R: https://www.r-project.org/
 Seurat: https://satijalab.org/seurat/articles/install.html
 
 qlcMatrix: https://cran.r-project.org/web/packages/qlcMatrix/index.html
+
     install.packages("qlcMatrix")
 
 Seurat v4:
+
     remotes::install_version("SeuratObject", "4.1.4", repos = c("https://satijalab.r-universe.dev", getOption("repos")))
     remotes::install_version("Seurat", "4.4.0", repos = c("https://satijalab.r-universe.dev", getOption("repos")))
 
 Seurat v5:
+
     install.packages("Seurat") 
     
 
