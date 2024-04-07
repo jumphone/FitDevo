@@ -58,8 +58,10 @@ Users can use R to load the "RDS" file.
 # Requirements:
 
     R: 4.0.0+
-    Seurat: v4 (currently, fitdevo doesn't support Seurat v5)
+    Seurat: v4
     qlcMatrix: 0.9.7
+
+FitDevo for Seurat v5: https://github.com/jumphone/FitDevo/blob/main/fitdevo_seurat5.R
 
 R: https://www.r-project.org/
 
