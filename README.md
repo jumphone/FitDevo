@@ -88,6 +88,7 @@ Seurat v5:
 # Usage:
     
     source('https://github.com/jumphone/FitDevo/blob/main/fitdevo.R?raw=true') 
+    # source('https://github.com/jumphone/FitDevo/blob/main/fitdevo_seurat5.R?raw=true')
 
     fitdevo( MAT=MAT, BGW=BGW, NORM=TRUE, PCNUM=50 )
     
